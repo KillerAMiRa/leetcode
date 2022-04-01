@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端-陈胜笔试</title>
+  </head>
+  <body>
+    <div id="rich">
+      <ul>
+        <li><a>A</a></li>
+        <li><a>B</a></li>
+        <li><a>C</a></li>
+      </ul>
+      <h3>hello richai</h3>
+      <div>
+        <input />
+        <button />
+      </div>
+    </div>
+
+    <script>
+      /**
+       * 获取div节点下所有标签出现的次数
+       * @param idName string 节点id名称
+       */
+      function getTagNameCount(idName) {
+        const type = typeof idName === 'string'
+        if (!type) {
+          throw '参数必须为string类型'
+        }
+        const node = document.getElementById(idName)
+        const tagNameAll = Array.from(node.querySelectorAll('*')).map(v => v.tagName)
+        const obj = {}
+
+        for (const key of tagNameAll) {
+          if (obj[key]) {
+            obj[key] += 1
+          } else {
+            obj[key] = 1
+          }
+        }
+
+        return obj
+      }
+
+      console.log(getTagNameCount('rich'))
+    </script>
+  </body>
+</html>

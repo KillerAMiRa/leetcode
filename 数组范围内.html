@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    输入 长度为n的数组，判断数组中的元素是否在0 ~ n-1 范围内，且每个数只出现一次
+
+    输入：[1,2,3,0]
+
+    输出：true
+    */
+  function sum(arr) {
+    const isArr = arr instanceof Array
+    if (!isArr) {
+      throw('请传入数组')
+    }
+
+    const arrset = Array.from(new Set(arr)).length
+    if (arr.length !== arrset) {
+      throw('数组中有重复项')
+    }
+
+    const len = arr.length
+    if (arr.find(v => v < 0 || v > len - 1)) {
+      return false
+    }
+    return true
+  }
+
+  const rulest = sum([1, 2, 3, 5, 0])
+  console.log('--- rulest', rulest)
+  </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 100%;
+        display: flex;
+      }
+      .left {
+        width: 150px;
+      }
+      .right {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+
+    <script>
+      let S = function Te() {}
+      let ss = new S()
+
+      // console.log('--- constructor', ss.prototype)
+      // console.log('--- prototype', S.prototype)
+      function sameNumbers(arr1, arr2) {
+        const s1 = arr1 instanceof Array
+        const s2 = arr2 instanceof Array
+        if (!s1 || !s2) {
+          throw '--sameNumbers()--参数不是数组'
+        }
+
+        const newArr = arr1.concat(arr2)
+        // 去除非数值
+        const numArr = newArr.map(k => Number(k)).filter(v => v)
+        const obj = {},
+          heavy = []
+
+        // 查重
+        numArr.forEach(j => {
+          if (obj[j]) {
+            heavy.push(j)
+          } else {
+            obj[j] = j
+          }
+        })
+      }
+      // console.log(sameNumbers([1, 'a', '1', 2], [2]))
+
+      function flatten(obj) {}
+
+      const comType = ['object', 'array']
+
+      const result = {}
+
+      /*
+        obj    对象
+        prekey 分割符，默认为空
+      */
+      function flatten2(obj, prekey = '') {
+        prekey = prekey ? prekey + '.' : ''
+
+        const keys = Object.keys(obj)
+
+        keys.forEach(function (item) {
+          const v = obj[item]
+
+          const type = typeof v
+
+          if (v && comType.indexOf(type) != -1) {
+            flatten(v, prekey + item)
+          } else {
+            result[prekey + item] = v
+          }
+        })
+
+        return result
+      }
+
+      // const result = {}
+      let obj = {
+        A: {
+          a1: 1,
+
+          a2: 2
+        },
+
+        B: {
+          b: 3
+        }
+      }
+      let ssa = flatten(obj)
+
+      // console.log(ssa)
+      function isObj(val) {
+        return typeof val === 'object' && val !== null
+      }
+
+      function flatten(obj) {
+        if (!isObj(obj)) {
+          return
+        }
+
+        let res = {}
+
+        // 深度优先搜索
+        const dfs = (cur, prefix) => {
+          if (isObj(cur)) {
+            if (Array.isArray(cur)) {
+              cur.forEach((item, index) => {
+                dfs(item, `${prefix}${index}`)
+              })
+            } else {
+              for (let key in cur) {
+                dfs(cur[key], `${prefix}${prefix ? '.' : ''}${key}`)
+              }
+            }
+          } else {
+            res[prefix] = cur
+          }
+        }
+
+        dfs(obj, '')
+
+        return res
+      }
+    </script>
+
+    <script>
+      /*
+        2.2 版本比较
+        2.2.1 题目要求
+        Semantic Versioning 是一个前端通用的版本定义规范。格式为“{MAJOR}.{MINOR}.{PATCH}-{alpha|beta|rc}.{number}”，
+        要求实现 compare(a, b) 方法，比较 a, b 两个版本大小。
+        - 当 a > b 是返回 1；
+        - 当 a = b 是返回 0；
+        - 当 a < b 是返回 -1；
+        - 其中，rc > beta > alpha，major > minor > patch；
+        - 例子，1.2.3 < 1.2.4 < 1.3.0.alpha.1 < 1.3.0.alpha.2 < 1.3.0.beta.1 < 1.3.0.rc.1 < 1.3.0
+      */
+
+     /*
+      function compare(a, b) {
+        // 你的代码
+      }
+      // 最终效果是执行
+      compare('1.2.3', '1.2.4')
+
+      // 得到
+      -1
+     */
+      const obj1 = {
+        rc: 5,
+        beta: 4,
+        alpha: 3,
+        major: 3,
+        minor: 2,
+        patch: 1
+      }
+      function compare(a, b) {
+        // 你的代码
+      }
+
+
+    </script>
+    <script>
+      setTimeout(() => {
+        console.log('a')
+        Promise.resolve().then(() => {
+          console.log('b')
+        })
+      }, 1000)
+      Promise.resolve().then(() => {
+        console.log('c')
+      })
+      new Promise((resolve) => {
+        console.log('d')
+        resolve('')
+      }).then(() => {
+        console.log('e')
+      })
+
+      async function sum(a, b) {
+        console.log('f')
+      }
+      async function asyncSum(a, b) {
+        await Promise.resolve()
+        console.log('g')
+        return Promise.resolve(a + b)
+      }
+
+      sum(3, 4)
+    </script>
+  </body>
+</html>
